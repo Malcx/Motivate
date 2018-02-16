@@ -2,7 +2,7 @@
 
 ## About
 
-A small app to display a random motivational message every time you log on / return from the windows lock screen. This seemed to be a more consistant method than 
+A small app to display a random motivational message every time you log on / return from the windows lock screen. This seemed to be a more consistant method than trying to do a subliminal message approach (flash on screen for a few ms) This always was visible tome and distracting!
 
 
 ## Usage & configuration
