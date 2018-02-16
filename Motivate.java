@@ -1,5 +1,3 @@
-//https://superuser.com/questions/615114/how-to-make-a-window-task-run-everytime-i-enter-my-password-unlock-the-computer
-
 import javafx.application.Application;
 
 
