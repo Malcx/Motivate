@@ -2,22 +2,23 @@
 
 ## About
 
-A small app to display a random motivational message every time you log on / return from the windows lock screen. This seemed to be a more consistant method than trying to do a subliminal message approach (flash on screen for a few ms) This always was visible tome and distracting!
+A small app to display a random motivational message every time you log on / return from the windows lock screen. This seemed to be a more consistant method than trying to do a subliminal message approach (flash on screen for a few ms) This always was visible to me and distracting!
 
 
 ## Usage & configuration
 
 It is assumed you have a functioning install of Java 8 with path/classpath configured.
 
-1. Rename messages_SAMPLE.txt to messages.txt
-2. Edit messages.txt to list the quotes you want to see. One per line that will be randomly selected.
-3. Edit config.props to change how long the message is displayed in ms (default 2000 == 2 seconds)
+1. Rename `messages_SAMPLE.txt` to `messages.txt`
+2. Edit `messages.txt` to list the quotes you want to see. One message per line that will be randomly selected.
+3. Edit `config.props` to change how long the message is displayed in ms (default 2000 == 2 seconds)
 4. From a command prompt test with `java Motivate`
-5. Edit application.css to amend background colours, or label display properties
+5. Edit `application.css` to amend background colours, or label display properties
 
 
 ## Run on Log on (windows)
 Mostly taken from:
+
 https://superuser.com/questions/615114/how-to-make-a-window-task-run-everytime-i-enter-my-password-unlock-the-computer
 
 1. Start Task Scheduler from the start Menu
