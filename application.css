@@ -1,4 +1,7 @@
 .root { -fx-background-color: #335; }
+.text{
+	-fx-font-smoothing-type: gray;
+}
 .label{
 	-fx-font-size: 36px;
 	-fx-font-weight: bold;
