@@ -24,7 +24,6 @@ public class Motivate extends Application {
 		Properties props = new Properties();
 	 	String theMessage = "Focus";
 		int displayTime = 2000; // 2 second default
- 
 		try{
  
  
@@ -70,6 +69,12 @@ public class Motivate extends Application {
 		StackPane layoutPane = new StackPane();
 		layoutPane.getStylesheets().add("application.css");
 		initStage.setScene(new Scene(layoutPane, 300, 250));
+
+		int r = 2 + (int)(Math.random()*7);
+		int g = 2 + (int)(Math.random()*7);
+		int b = 2 + (int)(Math.random()*7);
+
+ 		layoutPane.setStyle("-fx-background-color: #" + r + g + b);
 
 		Label label = new Label(theMessage);
 		layoutPane.getChildren().add(label);
