@@ -6,6 +6,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 
 import java.io.InputStream;
 import java.io.FileInputStream;
@@ -23,7 +25,7 @@ public class Motivate extends Application {
  
 		Properties props = new Properties();
 	 	String theMessage = "Focus";
-		int displayTime = 2000; // 2 second default
+		int displayTime = 1500 + (int)(Math.random()*1500); // 1.5 to 3 second default
 		try{
  
  
@@ -45,6 +47,7 @@ public class Motivate extends Application {
 
 			// Print your random quote... 
 			theMessage = array.get(randomIndex);
+			theMessage = theMessage.replace("|", "\n");
 			System.out.println(array.get(randomIndex));
 			
 		}
@@ -60,24 +63,47 @@ public class Motivate extends Application {
  
 		// StageStyle.UTILITY means no taskbar, but cannot be TRANSPARENT
 		Stage initStage = new Stage(StageStyle.UTILITY);
+		Stage secondStage = new Stage(StageStyle.UTILITY);
+	
+		for (Screen screen : Screen.getScreens()) 
+            	{
+            		Rectangle2D bounds = screen.getVisualBounds();
+            	            secondStage.setX(bounds.getMinX() + 100);
+            	}
+   	        initStage.setX(100);
 		initStage.setMaximized(true);
+		initStage.setAlwaysOnTop(true);
 		initStage.setFullScreen(true);
-
 		// Disable overlay message
 		initStage.setFullScreenExitHint("");
 
+		secondStage.setMaximized(true);
+		secondStage.setAlwaysOnTop(true);
+//		secondStage.setFullScreen(true);
+//		secondStage.setFullScreenExitHint("");
+
+
 		StackPane layoutPane = new StackPane();
+		StackPane secondlayoutPane = new StackPane();
 		layoutPane.getStylesheets().add("application.css");
+		secondlayoutPane.getStylesheets().add("application.css");
 		initStage.setScene(new Scene(layoutPane, 300, 250));
+		secondStage.setScene(new Scene(secondlayoutPane, 300, 250));
 
 		int r = 2 + (int)(Math.random()*7);
 		int g = 2 + (int)(Math.random()*7);
 		int b = 2 + (int)(Math.random()*7);
 
  		layoutPane.setStyle("-fx-background-color: #" + r + g + b);
+ 		secondlayoutPane.setStyle("-fx-background-color: #" + r + g + b);
 
 		Label label = new Label(theMessage);
 		layoutPane.getChildren().add(label);
+
+		Label secondlabel = new Label(theMessage);
+		secondlayoutPane.getChildren().add(secondlabel);
+
+		secondStage.show();
 		initStage.show();
 
 		try{
@@ -86,7 +112,8 @@ public class Motivate extends Application {
 		catch(Exception e)
 		{}
 		initStage.hide();
-
+		secondStage.hide();
+		System.exit(0);
 	}
 
 	public static void main(String[] args) {
