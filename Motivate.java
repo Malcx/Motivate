@@ -62,57 +62,58 @@ public class Motivate extends Application {
 		// Platform.setImplicitExit(false);
  
 		// StageStyle.UTILITY means no taskbar, but cannot be TRANSPARENT
-		Stage initStage = new Stage(StageStyle.UTILITY);
-		Stage secondStage = new Stage(StageStyle.UTILITY);
-	
+
+		int screenCount = 0;
 		for (Screen screen : Screen.getScreens()) 
-            	{
-            		Rectangle2D bounds = screen.getVisualBounds();
-            	            secondStage.setX(bounds.getMinX() + 100);
-            	}
-   	        initStage.setX(100);
-		initStage.setMaximized(true);
-		initStage.setAlwaysOnTop(true);
-		initStage.setFullScreen(true);
-		// Disable overlay message
-		initStage.setFullScreenExitHint("");
+			screenCount++;
 
-		secondStage.setMaximized(true);
-		secondStage.setAlwaysOnTop(true);
-//		secondStage.setFullScreen(true);
-//		secondStage.setFullScreenExitHint("");
-
-
-		StackPane layoutPane = new StackPane();
-		StackPane secondlayoutPane = new StackPane();
-		layoutPane.getStylesheets().add("application.css");
-		secondlayoutPane.getStylesheets().add("application.css");
-		initStage.setScene(new Scene(layoutPane, 300, 250));
-		secondStage.setScene(new Scene(secondlayoutPane, 300, 250));
-
+		Stage[] stageArray = new Stage[screenCount];
+		StackPane[] stackPaneArray = new StackPane[screenCount];
+		
+		
 		int r = 2 + (int)(Math.random()*7);
 		int g = 2 + (int)(Math.random()*7);
 		int b = 2 + (int)(Math.random()*7);
 
- 		layoutPane.setStyle("-fx-background-color: #" + r + g + b);
- 		secondlayoutPane.setStyle("-fx-background-color: #" + r + g + b);
+		int thisScreenID = 0;
+		for (Screen screen : Screen.getScreens()) 
+            	{
+	            	stageArray[thisScreenID] =  new Stage(StageStyle.UTILITY);
+            		Rectangle2D bounds = screen.getVisualBounds();
+            	        stageArray[thisScreenID].setX(bounds.getMinX() + 100);
+            	 	stageArray[thisScreenID].setMaximized(true);
+			stageArray[thisScreenID].setAlwaysOnTop(true);
+			
+			stackPaneArray[thisScreenID] = new StackPane();
+			stackPaneArray[thisScreenID].getStylesheets().add("application.css");
+			
+			stageArray[thisScreenID].setScene(new Scene(stackPaneArray[thisScreenID], 300, 250));
+			
+			stackPaneArray[thisScreenID].setStyle("-fx-background-color: #" + r + g + b);
 
-		Label label = new Label(theMessage);
-		layoutPane.getChildren().add(label);
+			Label label = new Label(theMessage);
+			stackPaneArray[thisScreenID].getChildren().add(label);
+			
+			stageArray[thisScreenID].show();
+			
+			thisScreenID++;
 
-		Label secondlabel = new Label(theMessage);
-		secondlayoutPane.getChildren().add(secondlabel);
+            	}
 
-		secondStage.show();
-		initStage.show();
+		stageArray[0].setFullScreen(true);
+		stageArray[0].setFullScreenExitHint("");
+
+
+
 
 		try{
 			Thread.sleep(displayTime);
 		}
 		catch(Exception e)
 		{}
-		initStage.hide();
-		secondStage.hide();
+		
+		for(int i=0;i<screenCount;i++)
+			stageArray[i].hide();
 		System.exit(0);
 	}
 
